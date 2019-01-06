@@ -1,1 +1,1 @@
-This is the README file for Udemy Python class
+README file for Udemy Python Class
