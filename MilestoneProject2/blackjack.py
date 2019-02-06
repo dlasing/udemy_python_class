@@ -62,7 +62,37 @@ class Card():
 		return f"the card @ Card() is.. {suit_color(self.suit)}{self.suit} {self.rank}{Style.RESET_ALL}"
 			
 	
+	
+	
+class Hand():
+			
+	def __init__(self):
+		self.card = []  # list to hold the cards on hand
+		self.value = 0  # the value of all the cards
+		self.aces = 0
 		
+	def add_card(self, cards):
+		self.card.append(cards)
+		print (f'This is the card list on Hand(): {self.card}')  # debug
+		
+		self.value += values[cards[1]]
+		print (f'This is the value of card on Hand(): {self.value}')  #debug
+		
+		if cards[1] == 'A':
+			self.aces += 1
+		print (f'Number of Aces on Hand(): {self.aces}')   #debug
+		
+		return self.value
+			
+			
+	def adjust_for_ace(self):
+		self.value = self.value - 10
+		print (f'This is the value of card on Hand(): {self.value}')  #debug
+		
+		return self.value
+		
+
+
 
 while playing == True:
 
@@ -75,17 +105,33 @@ while playing == True:
 	#print (f'values: {values_pick}')
 	
 	
+	# decale the Deck() and shuffle
 	a = Deck()
 	#print (a)	
 	a.shuffle()
 	
 	#print (a)
 	
+	
+	# deal the card. pop() from the shuffle list
 	got_it = a.deal()
 	#b = Card(got_it[0], got_it[1])	
-	print (Card(got_it[0], got_it[1]))
-
 	
+	# The card at the Card()
+	print (Card(got_it[0], got_it[1]))
+	
+	
+	b = Hand()
+	hand_value = b.add_card(got_it)
+	print (f'The value on hand {hand_value}')
+
+	got_it = a.deal()
+	hand_value = b.add_card(got_it)
+	print (f'The value on hand {hand_value}')
+
+	hand_value = b.adjust_for_ace()
+	print (f'The value on hand {hand_value}')
+
 	#a.deal()
 	
 	#b = Card(suits_pick, ranks_pick)
