@@ -18,6 +18,29 @@ def suit_color(suit):
 	else:
 		return Fore.BLACK
 
+
+
+def take_bet():
+	
+	while True:
+		try:
+			bet = int(input('Please make the bet.  '))
+		except:
+			print ('Ooops. money amount only!')
+			continue
+		else:
+			print (f'Thanks! You bet ${bet}')
+			break
+			return bet
+		
+
+def hit(deck,hand):
+	# function to hit 
+	pop_card = deck.deal()
+	hand.add_card(pop_card)
+	
+
+
  
 
 class Deck():
@@ -156,6 +179,9 @@ while playing == True:
 	c = Chips()
 	print (c)
 	
+	take_bet()
+	
+	hit(a,b)
 	
 	x = input ('Play again? Y/N  ')
 	if x == "Y" or x == "y":
