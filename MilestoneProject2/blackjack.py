@@ -31,9 +31,8 @@ class Deck():
 		
 	def __str__(self):
 		print ('List of Deck')
-		for x in range(0,52):
-			code = suit_color(self.deck[x][0])	
-			print (f'{code}{self.deck[x][0]} {self.deck[x][1]} {Style.RESET_ALL}')
+		for x in range(0,52):	
+			print (f'{suit_color(self.deck[x][0])}{self.deck[x][0]} {self.deck[x][1]} {Style.RESET_ALL}')
 							
 		return "DONE"
 
@@ -42,15 +41,13 @@ class Deck():
 		random.shuffle(self.deck)
 		print ('shuffled')
 		for x in range(0,52):
-			code = suit_color(self.deck[x][0])	
-			print (f'{code}{self.deck[x][0]} {self.deck[x][1]} {Style.RESET_ALL}')
+			print (f'{suit_color(self.deck[x][0])}{self.deck[x][0]} {self.deck[x][1]} {Style.RESET_ALL}')
 
 
 
 	def deal(self):
-		single_card = self.deck.pop()
-		code = suit_color(single_card[0])	
-		print (f"single card is........{code}{single_card[0]}  {single_card[1]} {Style.RESET_ALL}")
+		single_card = self.deck.pop()	
+		#print (f"single card is........{suit_color(single_card[0])}{single_card[0]}  {single_card[1]} {Style.RESET_ALL}")
 		return single_card
 		
 		
@@ -62,7 +59,7 @@ class Card():
 		self.rank = rank
 		
 	def __str__(self):
-		return self.suit + self.rank
+		return f"the card @ Card() is.. {suit_color(self.suit)}{self.suit} {self.rank}{Style.RESET_ALL}"
 			
 	
 		
@@ -79,15 +76,14 @@ while playing == True:
 	
 	
 	a = Deck()
-	print (a)
-	
+	#print (a)	
 	a.shuffle()
 	
-	print (a)
+	#print (a)
 	
 	got_it = a.deal()
-	b = Card(got_it[0], got_it[1])	
-	print (b)
+	#b = Card(got_it[0], got_it[1])	
+	print (Card(got_it[0], got_it[1]))
 
 	
 	#a.deal()
