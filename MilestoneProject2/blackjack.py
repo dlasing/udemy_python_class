@@ -93,6 +93,22 @@ class Hand():
 		
 
 
+class Chips():
+	
+	def __init__(self):
+		self.total = int(input('How much money do you have?'))
+		self.bet = 0
+		
+	def __str__(self):
+		return f'You now have ${self.total}'
+		
+	def win_bet(self):
+		self.total += self.bet
+	
+	def lose_bet(self):
+		self.total += self.bet
+		
+		
 
 while playing == True:
 
@@ -128,17 +144,17 @@ while playing == True:
 	got_it = a.deal()
 	hand_value = b.add_card(got_it)
 	print (f'The value on hand {hand_value}')
+	
+	got_it = a.deal()
+	hand_value = b.add_card(got_it)
+	print (f'The value on hand {hand_value}')
 
 	hand_value = b.adjust_for_ace()
 	print (f'The value on hand {hand_value}')
 
-	#a.deal()
 	
-	#b = Card(suits_pick, ranks_pick)
-	#print (b)
-
-	#mycard = Card(Deck)
-	#mycard.printcard()
+	c = Chips()
+	print (c)
 	
 	
 	x = input ('Play again? Y/N  ')
