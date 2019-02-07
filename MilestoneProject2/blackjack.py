@@ -32,6 +32,9 @@ def take_bet(chips):
 			print ('Ooops. money amount only!')
 			continue
 		else:
+			if bet == 0:
+				print (f'You need to put some money in...')
+				continue
 			if bet > chips:
 				print (f'You only have ${chips}. Lower the bet')
 				continue
@@ -41,14 +44,14 @@ def take_bet(chips):
 			return bet
 		
 
-def hit(deck,hand):
+def hit(mydeck,hand):
 	# function to hit 
-	pop_card = deck.deal()
+	pop_card = mydeck.deal()
 	hand.add_card(pop_card)
 	
 
 
-def hit_or_stand(deck,hand):
+def hit_or_stand(mydeck, player_hand):
 	global playing
 	
 	while True:
@@ -60,7 +63,7 @@ def hit_or_stand(deck,hand):
 		else:
 			if hit_or_stand == 'h':
 				playing = True
-				hit(deck, hand)
+				hit(mydeck, player_hand)
 				break
 			
 			if hit_or_stand == 's':
@@ -70,7 +73,7 @@ def hit_or_stand(deck,hand):
 				
 				
 				
-def show_some (player, dealer, player_chip, player_bet, player_hand_value ):
+def show_some (player, dealer, player_chip, player_bet, player_hand_value):
 	
 	print ('\n'*20)
 	print ('DEALER HAND')             
@@ -81,7 +84,8 @@ def show_some (player, dealer, player_chip, player_bet, player_hand_value ):
 			print (f'{suit_color(dealer[item][0])}FUCK YOU  {Style.RESET_ALL} ')	
 		else:
 			print (f'{suit_color(dealer[item][0])}{dealer[item][0]} {dealer[item][1]}  {Style.RESET_ALL} ')	
-		
+			
+			
 	print ('\n'*3)	
 	print ('GO LING HAND')             
 	print ('============')             
