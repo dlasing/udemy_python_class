@@ -41,7 +41,45 @@ def hit(deck,hand):
 	
 
 
- 
+def hit_or_stand(deck,hand):
+	global playing
+	
+	while True:
+		try:
+			hit_or_stand = input('Do you want to [h]it or [s]tand ?')
+		except:
+			print ('Enter [h]it or [s]tand')
+			continue
+		else:
+			if hit_or_stand == 'h':
+				playing = True
+				hit(deck, hand)
+				break
+			
+			if hit_or_stand == 's':
+				playing = False
+				print ('You stand')
+				break
+				
+				
+				
+def show_some (player, dealer):
+	
+	
+	print ('DEALER HAND')
+	print ('===========')
+		
+	for item in range(0,len(dealer)):
+		print (dealer[item])	
+		
+	
+	print ('PLAYER HAND')
+	print ('===========')
+
+	for item in range(0,len(player)):
+		print (dealer[item])				
+	
+	
 
 class Deck():
 # The Class for the while deck with method of shuffle and deal	
@@ -97,6 +135,7 @@ class Hand():
 	def add_card(self, cards):
 		self.card.append(cards)
 		print (f'This is the card list on Hand(): {self.card}')  # debug
+		show_some(self.card, self.card)                          # debug for show_some()
 		
 		self.value += values[cards[1]]
 		print (f'This is the value of card on Hand(): {self.value}')  #debug
@@ -119,8 +158,17 @@ class Hand():
 class Chips():
 	
 	def __init__(self):
-		self.total = int(input('How much money do you have?'))
-		self.bet = 0
+		
+		while True:
+			try:
+				self.total = int(input('How much money do you have?'))
+				self.bet = 0
+			except:
+				print ('Come on!')
+				continue
+			else:
+				print (f'You have ${self.total}')
+				break
 		
 	def __str__(self):
 		return f'You now have ${self.total}'
@@ -181,7 +229,16 @@ while playing == True:
 	
 	take_bet()
 	
-	hit(a,b)
+		
+	hit_or_stand(a,b)
+	#hit(a,b)
+	print (f'playing? {playing}')
+	
+	
+	
+	
+	
+	
 	
 	x = input ('Play again? Y/N  ')
 	if x == "Y" or x == "y":
