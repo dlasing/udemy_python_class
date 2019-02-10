@@ -106,10 +106,21 @@ def show_some (player, dealer, player_chip, player_bet, player_hand_value):
 	
 	
 	
-## Writing....
-def show_all (player, dealer, player_chip, player_bet, player_hand_value ):
+def show_all (player, dealer, player_chip, player_bet, player_hand_value, dealer_hand_value):
 	
 	print ('\n'*20)
+	print ('DEALER HAND')             
+	print ('===========')     		                    
+	for item in range(0,len(dealer)):
+		
+		print (f'{suit_color(dealer[item][0])}{dealer[item][0]} {dealer[item][1]}  {Style.RESET_ALL} ')	
+		
+	print ('\n'*1)
+	print (f'Card Value   {dealer_hand_value}')
+
+			
+			
+	print ('\n'*3)	
 	print ('GO LING HAND')             
 	print ('============')             
 	
@@ -120,16 +131,46 @@ def show_all (player, dealer, player_chip, player_bet, player_hand_value ):
 	print ('\n'*1)
 	print (f'Chip Amount: ${player_chip}')
 	print (f'Bet:         ${player_bet}')
-		
+	print (f'Card Value   {player_hand_value}')
+
+
+
+def player_busts(player_bet):
 	
-	print ('\n'*5)
-	print ('DEALER HAND')             
-	print ('===========')     		                    
-	for item in range(0,len(dealer)):
-		
-		print (f'{suit_color(dealer[item][0])}{dealer[item][0]} {dealer[item][1]}  {Style.RESET_ALL} ')	
-		
+	player_chip.lose_bet(player_bet)
+	print ('Go Ling loose!')
+	print (f'You bet ${player_bet}, you now have ${player_chip}')
 	
+
+def player_wins(player_bet):
+	
+	player_chip.win_bet(player_bet)
+	print ('Go Ling. You won')
+	print (f'Your won ${player_bet}, you now have ${player_chip}')
+	
+	
+def dealer_busts():
+	
+	print ('Dealer loose!')
+
+
+def dealer_wins():
+	
+	print ('Dealer Won!')
+	
+	
+def push():
+
+	print ('It is a tie!')
+	
+	
+	
+
+def player_wins(player_bet):
+	
+	player_chip.win_bet(player_bet)
+	print ('Go Ling. You won')
+	print (f'Your won ${player_bet}, you now have ${player_chip}')	
 	
 	
 
@@ -196,17 +237,20 @@ class Hand():
 		#print (f'Number of Aces on Hand(): {self.aces}')   #debug
 		
 		return self.value
-			
-			
+					
 	def adjust_for_ace(self):
 		self.value = self.value - 10
 		print (f'This is the value of card on Hand(): {self.value}')  #debug
 		
 		return self.value
-		
-		
+				
+				
 	def my_hand(self):
 		return self.card
+		
+		
+	def hand_value(self):
+		return self.value
 		
 		
 		
@@ -227,29 +271,29 @@ class Chips():
 				break
 		
 	def __str__(self):
-		return {self.total}
+		return str(self.total)
 		
-	def win_bet(self):
+	def win_bet(self, bet):
+		self.bet = bet
 		self.total += self.bet
 	
-	def lose_bet(self):
-		self.total += self.bet
+	def lose_bet(self, bet):
+		self.bet = bet
+		self.total -= self.bet
 		
 	def chips_amt(self):
 		return self.total
 
-while playing == True:
+while True:
 
-	suits_pick = suits[random.randrange(len(suits))]
-	ranks_pick = ranks[random.randrange(len(ranks))]
-	values_pick = values[ranks_pick]
+	#suits_pick = suits[random.randrange(len(suits))]
+	#ranks_pick = ranks[random.randrange(len(ranks))]
+	#values_pick = values[ranks_pick]
 	
 	print ('THIS IS THE GAME OF BLACKJACK... BIG WINNER!\n\n\n\n')
 	# Creat a deck of 52 cards and shuffle
 	mydeck = Deck()
 	mydeck.shuffle()
-	
-	
 	
 	
 	# Start the game. Ask player how much money does the player has
@@ -277,9 +321,28 @@ while playing == True:
 		dealer_hand_value = dealer_hand.add_card(dealer_card)
 	
 	
-	
-	# show cards
+	# show some cards
 	show_some(player_hand.my_hand(), dealer_hand.my_hand(), player_chip.chips_amt(), player_bet, player_hand_value)
+	
+	
+	while playing == True:
+		
+		hit_or_stand(mydeck,player_hand)
+		
+		show_some(player_hand.my_hand(), dealer_hand.my_hand(), player_chip.chips_amt(), player_bet, player_hand.hand_value())
+		
+		if player_hand_value > 21:
+			player_busts(player_bet)
+			break
+			
+		if dealer_hand_value > 21:
+			dealer_busts()
+			break
+			
+		
+	
+	#show all cards
+	#show_all(player_hand.my_hand(), dealer_hand.my_hand(), player_chip.chips_amt(), player_bet, player_hand_value, dealer_hand_value)
 	
 	
 	
@@ -304,10 +367,13 @@ while playing == True:
 	
 	
 	
+	#
+	player_wins(player_bet)
+	
 	
 		
 		
-	hit_or_stand(mydeck,player_hand)
+	
 	#hit(a,b)
 	print (f'playing? {playing}')
 	
