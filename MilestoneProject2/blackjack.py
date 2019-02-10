@@ -284,7 +284,7 @@ class Chips():
 	def chips_amt(self):
 		return self.total
 
-while True:
+while playing == True:
 
 	#suits_pick = suits[random.randrange(len(suits))]
 	#ranks_pick = ranks[random.randrange(len(ranks))]
@@ -375,8 +375,8 @@ while True:
 		
 	
 	#hit(a,b)
-	print (f'playing? {playing}')
 	
+	playing = input('Player? True or False')	
 	
 	
 	
