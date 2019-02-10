@@ -331,7 +331,7 @@ while True:
 		
 		show_some(player_hand.my_hand(), dealer_hand.my_hand(), player_chip.chips_amt(), player_bet, player_hand.hand_value())
 		
-		if player_hand_value > 21:
+		if  player_hand.hand_value() > 21:
 			player_busts(player_bet)
 			break
 			
@@ -368,7 +368,7 @@ while True:
 	
 	
 	#
-	player_wins(player_bet)
+	#player_wins(player_bet)
 	
 	
 		
