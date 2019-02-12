@@ -1,4 +1,5 @@
 import random
+import time
 from colorama import Fore
 from colorama import Style
 
@@ -64,11 +65,13 @@ def hit_or_stand(mydeck, player_hand):
 			if hit_or_stand == 'h':
 				playing = True
 				hit(mydeck, player_hand)
+				return False
 				break
 			
 			if hit_or_stand == 's':
 				playing = False
-				print ('You stand')
+				print ('You stand')		
+				return True	
 				break
 				
 				
@@ -85,6 +88,7 @@ def show_some (player, dealer, player_chip, player_bet, player_hand_value):
 		#else:
 		#	print (f'{suit_color(dealer[item][0])}{dealer[item][0]} {dealer[item][1]}  {Style.RESET_ALL} ')	
 		print (f'{suit_color(dealer[item][0])}{dealer[item][0]} {dealer[item][1]}  {Style.RESET_ALL} ')	
+		time.sleep(1)
 
 			
 			
@@ -94,6 +98,7 @@ def show_some (player, dealer, player_chip, player_bet, player_hand_value):
 	
 	for item in range(0,len(player)):
 		print (f'{suit_color(player[item][0])}{player[item][0]} {player[item][1]}  {Style.RESET_ALL}')
+		time.sleep(1)
 		
 	
 	print ('\n'*1)
@@ -179,27 +184,6 @@ def player_wins(player_bet):
 	
 
 
-def win_loose_check(player_hand, dealer_hand):
-	
-	if player_hand == 21:
-		player_wins(player_bet)
-		break
-		
-	if dealer_hand == 21:
-		dealer_wins()
-		break
-	
-	if player_hand > 21 and dealer_hand < 21:
-		player_busts(player_bet)
-		break
-		
-	if dealer_hand) > 21 and player_hand < 21:
-		dealer_busts()
-		break
-		
-	if dealer_hand > 21 and player_hand > 21: 
-		push()
-		break
 
 
 class Deck():
@@ -378,25 +362,24 @@ while playing == True:
 			push()
 			break
 			
-			
+					
+		player_is_stand = hit_or_stand(mydeck,player_hand)
+	
 		# dealer deal 1 card if the value <= 17	
 		if dealer_hand.hand_value() <= 17:
 			dealer_card = mydeck.deal()
 			dealer_hand_value = dealer_hand.add_card(dealer_card)
-		
-		
 			
-			hit_or_stand(mydeck,player_hand)
-	
-	
-	
-	#show all cards
-	# player win condition
-	
-	# Condition 1:  player win
-	
 			
-		
+		# When player is stand.  Dealer continue to deal until hand_value() > 17
+		if player_is_stand == True:
+			while dealer_hand.hand_value() <= 17:
+				dealer_card = mydeck.deal()
+				dealer_hand_value = dealer_hand.add_card(dealer_card)
+				
+	
+	
+	input('press [enter] to continue')	
 	show_all(player_hand.my_hand(), dealer_hand.my_hand(), player_chip.chips_amt(), player_bet, player_hand_value, dealer_hand_value)
 	
 	
