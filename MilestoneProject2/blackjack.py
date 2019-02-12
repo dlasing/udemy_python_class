@@ -80,10 +80,12 @@ def show_some (player, dealer, player_chip, player_bet, player_hand_value):
 	print ('===========')     		                    
 	for item in range(0,len(dealer)):
 		
-		if item == 0:
-			print (f'{suit_color(dealer[item][0])}FUCK YOU  {Style.RESET_ALL} ')	
-		else:
-			print (f'{suit_color(dealer[item][0])}{dealer[item][0]} {dealer[item][1]}  {Style.RESET_ALL} ')	
+		#if item == 0:
+		#	print (f'{suit_color(dealer[item][0])}FUCK YOU  {Style.RESET_ALL} ')	
+		#else:
+		#	print (f'{suit_color(dealer[item][0])}{dealer[item][0]} {dealer[item][1]}  {Style.RESET_ALL} ')	
+		print (f'{suit_color(dealer[item][0])}{dealer[item][0]} {dealer[item][1]}  {Style.RESET_ALL} ')	
+
 			
 			
 	print ('\n'*3)	
@@ -129,9 +131,10 @@ def show_all (player, dealer, player_chip, player_bet, player_hand_value, dealer
 		
 	
 	print ('\n'*1)
-	print (f'Chip Amount: ${player_chip}')
-	print (f'Bet:         ${player_bet}')
 	print (f'Card Value   {player_hand_value}')
+	print (f'Bet:         ${player_bet}')
+	print (f'Chip Amount: ${player_chip}')
+
 
 
 
@@ -156,6 +159,7 @@ def dealer_busts():
 
 def dealer_wins():
 	
+	player_chip.lose_bet(player_bet)
 	print ('Dealer Won!')
 	
 	
@@ -173,6 +177,30 @@ def player_wins(player_bet):
 	print (f'Your won ${player_bet}, you now have ${player_chip}')	
 	
 	
+
+
+def win_loose_check(player_hand, dealer_hand):
+	
+	if player_hand == 21:
+		player_wins(player_bet)
+		break
+		
+	if dealer_hand == 21:
+		dealer_wins()
+		break
+	
+	if player_hand > 21 and dealer_hand < 21:
+		player_busts(player_bet)
+		break
+		
+	if dealer_hand) > 21 and player_hand < 21:
+		dealer_busts()
+		break
+		
+	if dealer_hand > 21 and player_hand > 21: 
+		push()
+		break
+
 
 class Deck():
 # The Class for the while deck with method of shuffle and deal	
@@ -194,8 +222,8 @@ class Deck():
 	def shuffle(self):
 		random.shuffle(self.deck)
 		print ('shuffled')
-		for x in range(0,52):
-			print (f'{suit_color(self.deck[x][0])}{self.deck[x][0]} {self.deck[x][1]} {Style.RESET_ALL}')
+		#for x in range(0,52):
+		#	print (f'{suit_color(self.deck[x][0])}{self.deck[x][0]} {self.deck[x][1]} {Style.RESET_ALL}')
 
 
 
@@ -285,7 +313,7 @@ class Chips():
 		return self.total
 
 while playing == True:
-
+	
 	#suits_pick = suits[random.randrange(len(suits))]
 	#ranks_pick = ranks[random.randrange(len(ranks))]
 	#values_pick = values[ranks_pick]
@@ -322,27 +350,54 @@ while playing == True:
 	
 	
 	# show some cards
-	show_some(player_hand.my_hand(), dealer_hand.my_hand(), player_chip.chips_amt(), player_bet, player_hand_value)
+	#show_some(player_hand.my_hand(), dealer_hand.my_hand(), player_chip.chips_amt(), player_bet, player_hand_value)
 	
 	
 	while playing == True:
 		
-		hit_or_stand(mydeck,player_hand)
 		
 		show_some(player_hand.my_hand(), dealer_hand.my_hand(), player_chip.chips_amt(), player_bet, player_hand.hand_value())
 		
-		if  player_hand.hand_value() > 21:
+		if player_hand.hand_value() == 21:
+			player_wins(player_bet)
+			break
+			
+		if dealer_hand.hand_value() == 21:
+			dealer_wins()
+			break
+		
+		if player_hand.hand_value() > 21 and dealer_hand.hand_value() < 21:
 			player_busts(player_bet)
 			break
 			
-		if dealer_hand_value > 21:
+		if dealer_hand.hand_value() > 21 and player_hand.hand_value() < 21:
 			dealer_busts()
 			break
 			
+		if dealer_hand.hand_value() > 21 and player_hand.hand_value() > 21: 
+			push()
+			break
+			
+			
+		# dealer deal 1 card if the value <= 17	
+		if dealer_hand.hand_value() <= 17:
+			dealer_card = mydeck.deal()
+			dealer_hand_value = dealer_hand.add_card(dealer_card)
 		
+		
+			
+			hit_or_stand(mydeck,player_hand)
+	
+	
 	
 	#show all cards
-	#show_all(player_hand.my_hand(), dealer_hand.my_hand(), player_chip.chips_amt(), player_bet, player_hand_value, dealer_hand_value)
+	# player win condition
+	
+	# Condition 1:  player win
+	
+			
+		
+	show_all(player_hand.my_hand(), dealer_hand.my_hand(), player_chip.chips_amt(), player_bet, player_hand_value, dealer_hand_value)
 	
 	
 	
