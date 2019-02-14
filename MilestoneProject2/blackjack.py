@@ -181,7 +181,8 @@ def dealer_busts(player_bet):
 	
 
 
-def dealer_wins():
+
+def dealer_wins(player_bet):
 	
 	player_chip.lose_bet(player_bet)
 	print ('Dealer Won!')
@@ -408,7 +409,7 @@ while play_again == True:
 				
 				
 			if dealer_hand.hand_value() == 21:
-				dealer_wins()
+				dealer_wins(player_bet)
 				
 			
 			if player_hand.hand_value() > 21 and dealer_hand.hand_value() < 21:
@@ -425,7 +426,12 @@ while play_again == True:
 				
 			if dealer_hand.hand_value() == player_hand.hand_value():
 				push()
+			
+			if dealer_hand.hand_value() < 21 and player_hand.hand_value() < 21 and dealer_hand.hand_value() > player_hand.hand_value():
+				dealer_wins(player_bet)
 				
+			if dealer_hand.hand_value() < 21 and player_hand.hand_value() < 21 and dealer_hand.hand_value() < player_hand.hand_value():
+				player_wins(player_bet)
 	
 	input('press [enter] to continue')	
 	
