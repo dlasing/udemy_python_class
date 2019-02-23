@@ -372,7 +372,7 @@ while play_again == True:
 			break
 			
 		if dealer_hand.hand_value() == 21:
-			dealer_wins()
+			dealer_wins(player_bet)
 			break
 		
 		if player_hand.hand_value() > 21 and dealer_hand.hand_value() < 21:
@@ -395,12 +395,22 @@ while play_again == True:
 			dealer_card = mydeck.deal()
 			dealer_hand_value = dealer_hand.add_card(dealer_card)
 			
+			# Adjust A's value from 10 to 1 if dealer_hand_value >= 19
+			if dealer_hand_value >= 19 and dealer_hand.aces > 0:
+				print ('Dealer about to adjust A value')
+				dealer_hand_value = dealer_hand.adjust_for_ace()
+				
 			
 		# When player is stand.  Dealer continue to deal until hand_value() > 17
 		if player_is_stand == True:
 			while dealer_hand.hand_value() <= 17:
 				dealer_card = mydeck.deal()
 				dealer_hand_value = dealer_hand.add_card(dealer_card)
+				
+				# If dealer_hand_value >19 and dealer_hand.aces > 0
+				if dealer_hand_value >= 19 and dealer_hand.aces > 0:
+					print ('Dealer about to adjust A value')
+					dealer_hand_value = dealer_hand.adjust_for_ace()
 				
 				show_some(player_hand.my_hand(), dealer_hand.my_hand(), player_chip.chips_amt(), player_bet, player_hand.hand_value())
 	
