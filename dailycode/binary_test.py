@@ -18,14 +18,19 @@ def node_res(root):
 	# node_res() called, count the number of call
 	call_level += 1
 	
-	print (f"This is level: {call_level}")
-	print (f"root is : {root}")
-	print ("\n")
+	
 	
 	# Return True if this is the end of the Tree. 
-	if root == None:
-		
+	if root == None:	
+		print (f"This is level: {call_level}")
+		print ("root is: None\n\n")
 		return True
+	else:
+		print (f"This is level: {call_level}")
+		print (f"root is: {root.root}")
+		print (f"left is: {root.left}")
+		print (f"right is: {root.right}\n\n")
+ 
 		
 	# Check the node left and right leave.  
 	#         root
@@ -42,9 +47,15 @@ call_level = 0
 	
 
 
+
 	
 root = Node(5)
 root.left  = Node(4)
 root.right = Node (3)
+root.left.left = Node(2)
+root.left.right = Node(9)
+
+
+
 
 node_res(root)
