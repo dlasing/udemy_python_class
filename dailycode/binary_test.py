@@ -6,9 +6,9 @@
 # Basic Binary Tree node
 class Node:
 	
-	def __init__(self, root):
+	def __init__(self, data):
 		
-		self.root  = root
+		self.data  = data
 		self.left  = None
 		self.right = None
 		
@@ -31,10 +31,10 @@ def node_res(root):
 		return True
 	else:
 		print (f"This is level: {call_level}")
-		print (f"root is: {root.root}")
+		print (f"root is: {root.data}")
 		print (f"left is: {root.left}")
 		print (f"right is: {root.right}")
-		total = total + root.root
+		total = total + root.data
 		print (f"total is.... {total}\n\n")
 		
 	# Check the node left and right leave at 
@@ -45,6 +45,8 @@ def node_res(root):
 	#
 	left  = node_res(root.left)
 	right = node_res(root.right)
+	
+	
 	
 	return total	
 	
