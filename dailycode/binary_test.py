@@ -2,6 +2,8 @@
 # And try to add up all value in the tree. 
 # Learn the structure of the binary Tree. 
 
+
+# Basic Binary Tree node
 class Node:
 	
 	def __init__(self, root):
@@ -11,7 +13,7 @@ class Node:
 		self.right = None
 		
 		
-# The function to walk the binary tree top to bottom
+# The function to walk the binary tree from top to bottom
 def node_res(root):
 	
 	global call_level 
@@ -35,7 +37,8 @@ def node_res(root):
 		total = total + root.root
 		print (f"total is.... {total}\n\n")
 		
-	# Check the node left and right leave.  
+	# Check the node left and right leave at 
+	# each level
 	#         root
 	#         / \
 	#  root.left root.right
