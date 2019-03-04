@@ -1,20 +1,24 @@
-# This is the program to print the binary tree...
+# This is the program to print the binary tree level
+# And try to add up all value in the tree. 
 # Learn the structure of the binary Tree. 
 
+
+# Basic Binary Tree node
 class Node:
 	
-	def __init__(self, root):
+	def __init__(self, data):
 		
-		self.root  = root
+		self.data  = data
 		self.left  = None
 		self.right = None
 		
 		
-# The function to walk the binary tree top to bottom
+# The function to walk the binary tree from top to bottom
 def node_res(root):
 	
 	global call_level 
-	
+	global total
+		
 	# node_res() called, count the number of call
 	call_level += 1
 	
@@ -27,12 +31,14 @@ def node_res(root):
 		return True
 	else:
 		print (f"This is level: {call_level}")
-		print (f"root is: {root.root}")
+		print (f"root is: {root.data}")
 		print (f"left is: {root.left}")
-		print (f"right is: {root.right}\n\n")
- 
+		print (f"right is: {root.right}")
+		total = total + root.data
+		print (f"total is.... {total}\n\n")
 		
-	# Check the node left and right leave.  
+	# Check the node left and right leave at 
+	# each level
 	#         root
 	#         / \
 	#  root.left root.right
@@ -40,22 +46,33 @@ def node_res(root):
 	left  = node_res(root.left)
 	right = node_res(root.right)
 	
+	
+	
+	return total	
+	
+	
+	
+def node_total(root):
+	
+		return node_res(root)
+
+
+
 
 # gloal value
-
 call_level = 0	
-	
+total = 0
 
 
 
-	
+# Build the Nodes...	
 root = Node(5)
 root.left  = Node(4)
 root.right = Node (3)
-root.left.left = Node(2)
-root.left.right = Node(9)
+#root.left.left = Node(2)
+#root.left.right = Node(9)
 
 
 
 
-node_res(root)
+print (f"The total of the tree is... {node_total(root)}")
