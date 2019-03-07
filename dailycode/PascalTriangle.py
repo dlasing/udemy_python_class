@@ -26,15 +26,22 @@ class PascelTriangle:
 		for x in range (0, self.numRows):
 						
 			for y in range (0,x+1):
-				
+								
 				if y == 0 or y == x:					
 					mylist.append(1)	
 				else:
 					mylist.append(mylist[counter-x-1] + mylist[counter-x])	
-					
+				
 				counter += 1
 			
-			print (mylist)	
+			print (mylist)
+						
+		
+		
+		#print (mylist[counter-1:])
+			
+						
+			#print (mylist[x:y])
 		
 		
 		
