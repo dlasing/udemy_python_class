@@ -43,7 +43,7 @@ class Merge_array:
 		print (f"List_a = {list_a}")
 		print (f"List_b = {list_b}")
 			
-		
+		# append list_b to list_a in reverse order
 		for z in range(0, self.n):
 			list_a[-1-z] = list_b[z]
 		
