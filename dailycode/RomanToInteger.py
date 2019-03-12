@@ -33,21 +33,21 @@ class RomanToInteger:
 		self.input_int = input_int
 		
 	def build_symbol(self):
-		self.input_int = str(self.input_int)
-		roman_symbol = {1:"I", 5:"V", 10:"X", 50:"L", 100:"C", 500:"D", 1000:"M"}
+		num_map = [(1000, 'M'), (900, 'CM'), (500, 'D'), (400, 'CD'), (100, 'C'),
+		           (90, 'XC'), (50, "L"), (40, 'XL'), (10, 'X'), (9, 'IX'), (5, 'V'),
+		           (4, 'IV'), (1, 'I')]									
 		
+		roman = ''
 		
-		print (f"Input number is... {self.input_int}")
-		print (f"Output number is.. {roman_symbol[int(self.input_int)]}")
+		while self.input_int > 0:
+			for num, symb in num_map:
+				while self.input_int >= num:
+					roman += symb
+					self.input_int -= num
 		
-		if len(self.input_int) == 1:
-			
-		for x in (range(0, len(self.input_int))):
-			
-			print (f"value {x} is {self.input_int[x]}")
-			
+		print (roman)	
 			
 			 		
 		
-case = RomanToInteger(5)
+case = RomanToInteger(28)
 case.build_symbol()
