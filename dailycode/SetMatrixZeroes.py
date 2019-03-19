@@ -38,21 +38,38 @@ class SetMatrixZeroes:
 	
 	def set_zeroes(self, zero_list):
 		
+		# Analysis
+		# Based on the list returned from find_zero(),  we have "position" of 
+		# all 0 found
+		# For example:
+		# 
+		# [[0, 0], [0, 3]]
+		#   A  B    C  D
+		# 
 		# convert the target row to 0
-		for row in range(len(self.mylist[0])):
-			self.mylist[zero_list[0][0]][row] = 0
+		# pick the zero_list[row][0]  which is A, C, then convert
+		# the list to "0"
+		# In this example, we convert row "0" to all 0
+		for convert_row in range(len(zero_list)):
+			for row in range(len(self.mylist[0])):
+				self.mylist[zero_list[convert_row][0]][row] = 0
 			
 		# convert the target colum to 0
-		
-		for column in range(len(self.mylist)):
-			self.mylist[column][zero_list[0][1]] = 0
+		# pick the zero_list[column][1] which is B, D, the convert
+		# the list to "0"
+		for convert_column in range(len(zero_list[0])):
+			for column in range(len(self.mylist)):
+				self.mylist[column][zero_list[convert_column][1]] = 0
 			
 		print (self.mylist)
 		
 		
 				
 
-matrix_list = [ [1,1,1], [1,0,1], [1,1,1]]
+#matrix_list = [ [1,1,1], [1,0,1], [1,1,1]]
+matrix_list = [ [1,1,2,0], [3,4,0,2], [0,0,1,5]]
 
 case = SetMatrixZeroes(matrix_list)
-case.set_zeroes(case.find_zero())
+case.find_zero()
+
+#case.set_zeroes(case.find_zero())
