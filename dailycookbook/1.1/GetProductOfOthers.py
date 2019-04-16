@@ -29,6 +29,9 @@ class GetProductOfAllOthers:
 		
 		print (f"Result is {theresult}")
 			
+	
+	
+	
 				
 input_list = [3,2,1]
 case = GetProductOfAllOthers(input_list)		
